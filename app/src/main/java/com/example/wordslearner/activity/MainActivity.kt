@@ -1,7 +1,8 @@
-package com.example.wordslearner
+package com.example.wordslearner.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.wordslearner.R
 
 class MainActivity : AppCompatActivity() {
 
