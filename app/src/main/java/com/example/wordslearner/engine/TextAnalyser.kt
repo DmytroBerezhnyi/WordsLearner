@@ -1,18 +1,18 @@
+package com.example.wordslearner.engine
+
+import android.util.Log
 import java.util.*
-import kotlin.NoSuchElementException
+import kotlin.collections.ArrayList
 
-class TextAnalizer {
+class TextAnalyser {
 
-    public fun analyzeText(str : String): ArrayList<Node> {
-        val list = ArrayList<Node>()
-        println(str)
-        val words = str.split(" ")
+    public fun analyzeText(text: String, list : ArrayList<Node>) {
+        val words = text.toLowerCase(Locale.ENGLISH).split(" ")
 
         for(i in 0 until words.size) {
             if(ifExist(i, words, list)) {continue}
             ifNotExist(i, words, list)
         }
-        return list
     }
 
     private fun ifNotExist(i: Int, words: List<String>, list: ArrayList<Node>) {
