@@ -29,31 +29,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        openFile(Environment.getExternalStorageDirectory().absolutePath + "/Subtitles/testAT1.srt")
+        openFile(Environment.getExternalStorageDirectory().absolutePath + "/Subtitles/got.srt")
 
     }
 
     private fun openFile(path: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            Dexter.withActivity(this)
-                .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(object : PermissionListener {
-                    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                        analyse(path)
-                    }
+        Dexter.withActivity(this)
+            .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .withListener(object : PermissionListener {
+                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                    analyse(path)
+                }
 
-                    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
-                        token?.continuePermissionRequest()
-                    }
+                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+                    token?.continuePermissionRequest()
+                }
 
-                    override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                        Toast.makeText(this@MainActivity, "The program needs the permission for analysing subtitles", Toast.LENGTH_LONG).show()
-                    }
+                override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+                    Toast.makeText(this@MainActivity, "The program needs the permission for analysing subtitles", Toast.LENGTH_LONG).show()
+                }
 
-                }).check()
-        } else {
-            analyse(path)
-        }
+            }).check()
     }
 
     private fun analyse(path: String) {
